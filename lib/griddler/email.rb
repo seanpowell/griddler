@@ -2,7 +2,7 @@ require 'htmlentities'
 
 class Griddler::Email
   include ActionView::Helpers::SanitizeHelper
-  attr_reader :to, :from, :body, :raw_body, :subject, :attachments
+  attr_reader :to, :from, :body, :raw_body, :subject, :attachments, :spam_score, :spam_report, :spf, :dkim
 
   def initialize(params)
     @params = params
@@ -12,6 +12,10 @@ class Griddler::Email
     @body = extract_body
     @raw_body = params[:html] || params[:text]
     @attachments = extract_attachments
+    @spam_score = params[:spam_score]
+    @spam_report = params[:spam_report]
+    @spf = params[:SPF]
+    @dkim = params[:dkim]
   end
 
   def process
