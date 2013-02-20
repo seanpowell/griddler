@@ -10,7 +10,7 @@ class Griddler::Email
     @from = extract_address(params[:from], :email)
     @subject = params[:subject]
     @body = extract_body
-    @raw_body = params[:text] || params[:html]
+    @raw_body = params[:html] || params[:text]
     @attachments = extract_attachments
   end
 
